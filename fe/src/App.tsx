@@ -34,12 +34,8 @@ const App = () => {
             };
 
             ws.onmessage = (ev) => {
-                try {
-                    const data = JSON.parse(ev.data);
-                    setmsg((prev) => [...prev, data.message || ev.data]);
-                } catch (e) {
-                    setmsg((prev) => [...prev, ev.data]);
-                }
+                console.log("Received message from server:", ev.data);
+                setmsg((prev) => [...prev, ev.data]);
             };
 
             ws.onerror = (error) => {
@@ -73,16 +69,19 @@ const App = () => {
             return;
         }
 
+        const message = ipref.current.value.trim();
         const chat = {
             type: "chat",
             payload: {
-                message: ipref.current.value,
+                message: message,
             }
         };
 
         try {
+        
             ws.send(JSON.stringify(chat));
-            setmsg((prev) => [...prev, `You: ${ipref.current?.value}`]);
+           
+            setmsg((prev) => [...prev, `You: ${message}`]);
             ipref.current.value = '';
         } catch (err) {
             setError("Failed to send message");
