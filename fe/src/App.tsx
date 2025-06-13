@@ -1,14 +1,15 @@
 import React, { useEffect, useState ,useRef} from 'react';
 
 const App = () => {
-  const [socket, setSocket] = useState<WebSocket | null>(null);
+  //const [socket, setSocket] = useState<WebSocket | null>(null);
   const [val, setVal] = useState<string>("");
   //const [message, setMessage] = useState("");
   const ipref = useRef<any>(null);
+  const socketRef = useRef<WebSocket | null>(null)
 
   useEffect(() => {
     const ws = new WebSocket("ws://localhost:9200");
-    setSocket(ws);
+    socketRef.current=ws
 
     ws.onmessage = (ev) => {
       setVal(ev.data);
@@ -29,11 +30,12 @@ const App = () => {
   }, []);
 
   function send() {
-    if (!socket ) {
+    const ws = socketRef.current; // Access the WebSocket instance from the ref
+    if (!ws || ws.readyState !== WebSocket.OPEN) {
       console.error("WebSocket is not open.");
       return;
     }
-    socket.send(ipref.current.value); 
+    ws.send(ipref.current.value); // Send the input value to the server
   }
 
   return (

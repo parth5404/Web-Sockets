@@ -9,5 +9,6 @@ wss.on("connection", function (socket) {
         console.log("Received:", message.toString());
         const res="Server "+message.toString()
         socket.send(res);
+        console.log("res send ",res)
     });
 });
