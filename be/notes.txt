@@ -1,0 +1,2 @@
+To create a persisitent 2 way duplex connection then we use polling /long polling
+In polling the browser ask server multiple times continuously
