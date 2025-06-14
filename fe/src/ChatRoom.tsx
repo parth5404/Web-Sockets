@@ -14,7 +14,7 @@ const ChatRoom = () => {
 
     useEffect(function () {
         try {
-            const ws = new WebSocket("ws://localhost:9200");
+            const ws = new WebSocket("https://web-sockets-598n.onrender.com/");
             socketref.current = ws;
 
             ws.onopen = () => {
