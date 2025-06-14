@@ -1,10 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useParams } from "react-router-dom";
-
-interface msgJson {
-    type: string;
-    payload: payload;
-}
 
 interface payload {
     default?: string;
