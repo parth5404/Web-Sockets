@@ -27,7 +27,7 @@ wss.on("connection", function (socket) {
         }
         if(msgJson.type==="chat"){
             
-            const room=allSoc.filter((x)=>x.socket===socket)[0].room;
+            const room=allSoc.find((x)=>x.socket===socket)?.room;
             const users=allSoc.filter((x)=>x.room===room && x.socket!==socket) ;
             console.log("Chat request",room)
             for(let i=0;i<users.length;i++){
